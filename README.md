@@ -29,7 +29,6 @@
 2. Скачайте зависимости
    ```
    pip install -r requirements.txt
-   
 5. Запустите start.bat
    
 ## ⚡ Включение инлайн режима
