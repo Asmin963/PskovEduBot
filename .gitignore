@@ -1,0 +1,9 @@
+*.pyc
+
+venv/
+env/
+
+.idea/
+.vscode/
+
+.storage/
