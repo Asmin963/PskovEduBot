@@ -16,7 +16,7 @@ rm -rf get-pip.py
 echo -e "${GREEN}Установка git...${NC}"
 sudo apt install -y git
 
-sudo rm -rf FunPayCardinal
+sudo rm -rf PskovEduBot
 
 echo -e "${GREEN}Клонирование репозитория PskovEduBot...${NC}"
 git clone https://github.com/Asmin963/PskovEduBot
@@ -30,11 +30,12 @@ pip install -r reqierements.txt
 echo -e "${GREEN}Установка pm2...${NC}"
 npm install -g pm2
 
-echo -e "${GREEN}Запуск main.py через pm2...${NC}"
+echo -e "${GREEN}Запускаю программу...${NC}"
 pm2 start main.py --interpreter python3.12 --name PskovEduBot
-
 pm2 save
-
 pm2 startup
 
-echo -e "${GREEN}Установка завершена!${NC}"
+echo -e "\n${CYAN}Установка PskovEduBot завершена!${NC}"
+echo -e "${CYAN}Для просмотра логов используйте команду: pm2 logs PskovEduBot${NC}"
+
+pm2 logs PskovEduBot
