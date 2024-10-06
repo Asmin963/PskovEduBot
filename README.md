@@ -21,7 +21,7 @@
 
 1. Скачайте и выполните установочный скрипт:
    ```
-   curl -sSL https://github.com/Asmin963/PskovEduBot/edit/main/linux_install.sh | bash
+   wget https://raw.githubusercontent.com/Asmin963/PskovEduBot/refs/heads/main/linux_install.sh -nc && bash linux_install.sh
 После завершения установки бот будет готов к использованию.
 ### Для Windows
 1. Установите <a href="https://www.python.org/downloads/windows/">Python</a> (если не установлен).
