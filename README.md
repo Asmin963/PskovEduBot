@@ -25,11 +25,9 @@
    curl -sSL https://github.com/Asmin963/PskovEduBot/edit/main/linux_install.sh | bash
 После завершения установки бот будет готов к использованию.
 ### Для Windows
-1. Установите Python (если не установлен).
-2. Скачайте зависимости
-   ```
-   pip install -r requirements.txt
-5. Запустите start.bat
+1. Установите <a href="https://www.python.org/downloads/windows/">Python</a> (если не установлен).
+2. Запустите `setup.bat` и ожидайте завершения установки
+5. Запустите `start.bat`
    
 ## ⚡ Включение инлайн режима
 ### Для работы инлайн режима необходимо включить его в настройках бота через BotFather:
