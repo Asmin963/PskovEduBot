@@ -27,6 +27,15 @@ cd PskovEduBot
 echo -e "${GREEN}Создаю виртуальное окружение и устанавливаю зависимости...${NC}"
 pip install -r reqierements.txt
 
+echo -e "${GREEN}Установка curl...${NC}"
+sudo apt-get install -y curl
+
+echo -e "${GREEN}Загрузка NodeJS...${NC}"
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+
+echo -e "${GREEN}Установка NodeJS...${NC}"
+sudo apt -y install nodejs
+
 echo -e "${GREEN}Установка pm2...${NC}"
 sudo npm install -g pm2
 
