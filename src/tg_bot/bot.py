@@ -392,7 +392,7 @@ class Telegram:
         self.bot = TgBot(token=self.token, parse_mode='HTML')
         self.bot_me = self.bot.get_me()
 
-        self.msg_handler(self.register_admin_hanlder, func=not cfg.owner_id)
+        self.msg_handler(self.register_admin_hanlder, func=lambda _: not cfg.owner_id)
 
         self.set_description()
         self.set_short_description()
