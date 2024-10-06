@@ -28,7 +28,7 @@ echo -e "${GREEN}Создаю виртуальное окружение и ус�
 pip install -r reqierements.txt
 
 echo -e "${GREEN}Установка pm2...${NC}"
-npm install -g pm2
+sudo npm install -g pm2
 
 echo -e "${GREEN}Запускаю программу...${NC}"
 pm2 start main.py --interpreter python3.12 --name PskovEduBot
