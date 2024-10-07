@@ -30,5 +30,5 @@ def check_new_marks(acc, bot, delay):
                 bot.send_message(cfg.owner_id, message_text, parse_mode='HTML', reply_markup=keyboards.star_it() if random.random() < 0.4 else None)
         time.sleep(delay)
 
-def start_checking_marks(acc, bot, delay=30):
+def start_checking_marks(acc, bot, delay=20):
     Thread(target=check_new_marks, args=(acc, bot, delay,), daemon=True).start()
