@@ -31,4 +31,4 @@ def check_new_marks(acc, bot, delay):
         time.sleep(delay)
 
 def start_checking_marks(acc, bot, delay=20):
-    Thread(target=check_new_marks, args=(acc, bot, delay,), daemon=True).start()
+    Thread(target=check_new_marks, args=(acc, bot, delay), daemon=True).start()
