@@ -23,7 +23,7 @@ sudo apt install -y git
 sudo rm -rf PskovEduBot
 
 echo -e "${GREEN}Клонирование репозитория PskovEduBot...${NC}"
-git clone $REPO_URL"
+git clone "$REPO_URL"
 
 echo -e "${GREEN}Создаю виртуальное окружение и устанавливаю зависимости...${NC}"
 cd PskovEdutBot
