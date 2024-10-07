@@ -1,15 +1,19 @@
 #!/bin/bash
 
+REPO_URL="https://github.com/Asmin963/PskovEduBot"
+REPO_NAME="PskovEduBot"
+
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'
 MAGENTA='\033[0;35m'
 NC='\033[0m'
 
-echo -e "${GREEN}Установка Python 3.12 и зависимостей...${NC}"
-sudo apt install -y python3.12 python3.12-dev python3.12-gdbm python3.12-venv
+
+echo -e "${GREEN}Установка Python 3.11...${NC}"
+sudo apt install -y python3.11 python3.11-dev python3.11-gdbm python3.11-venv
 wget https://bootstrap.pypa.io/get-pip.py -nc
-sudo python3.12 get-pip.py
+sudo python3.11 get-pip.py
 
 rm -rf get-pip.py
 
@@ -19,32 +23,20 @@ sudo apt install -y git
 sudo rm -rf PskovEduBot
 
 echo -e "${GREEN}Клонирование репозитория PskovEduBot...${NC}"
-git clone https://github.com/Asmin963/PskovEduBot
-
-echo -e "${GREEN}Переход в директорию проекта...${NC}"
-cd PskovEduBot  
+git clone $REPO_URL"
 
 echo -e "${GREEN}Создаю виртуальное окружение и устанавливаю зависимости...${NC}"
+cd PskovEdutBot
 pip install -r reqierements.txt
 
-echo -e "${GREEN}Установка curl...${NC}"
-sudo apt-get install -y curl
-
-echo -e "${GREEN}Загрузка NodeJS...${NC}"
-curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-
-echo -e "${GREEN}Установка NodeJS...${NC}"
-sudo apt -y install nodejs
-
 echo -e "${GREEN}Установка pm2...${NC}"
-sudo npm install -g pm2
+npm install -g pm2
 
-echo -e "${GREEN}Запускаю программу...${NC}"
-pm2 start main.py --interpreter python3.12 --name PskovEduBot
+echo -e "${GREEN}Запускаю PskovEdutBot${NC}"
+pm2 start main.py --interpreter python3.11 --name PskovEduBot
+
 pm2 save
+
 pm2 startup
 
-echo -e "\n${CYAN}Установка PskovEduBot завершена!${NC}"
-echo -e "${CYAN}Для просмотра логов используйте команду: pm2 logs PskovEduBot${NC}"
-
-pm2 logs PskovEduBot
+echo -e "${CYAN}Установка завершена!${NC}"

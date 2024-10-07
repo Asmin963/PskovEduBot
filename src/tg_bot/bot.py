@@ -180,6 +180,9 @@ class Telegram:
 
         self.no_admin_messages = {}
 
+        self.short_desc = ""
+        self.desc = ""
+
     def add_func(self, f, kwargs, key='func'):
         existing_func = kwargs.get(key)
         if existing_func:
@@ -359,27 +362,27 @@ class Telegram:
             BotCommand(command, description) for command, description in self.commands.items()
         ])
 
-    def set_short_description(self):
-        """
-        Устанавливает описание бота
-        """
-        text = "📚 Бот для упрощения работы с one.pskovedu.ru"
-        if cfg.github_url:
-            text += f"\n\n🧑🏻‍💻 Github - {cfg.github_url}"
-        self.bot.set_my_short_description(text)
-
-    def set_description(self):
-        desc = f"""
+    def get_base_bot_info(self):
+        self.desc = f"""
 🤖 Бот для работы с Псковским образовательным порталом one.pskovedu.ru
 
 🔔 Уведомления
-👩‍🏫 Данные об учителях
+‍🏫 Данные об учителях
 💡 Инлайн-режим
 🎒 Расписания уроков
-"""
+    """
         if cfg.github_url:
-            desc += f"\n🖥 Github - {cfg.github_url}"
-        self.bot.set_my_description(desc)
+            self.desc += f"\n🖥 Github - {cfg.github_url}"
+
+        self.short_desc = "📚 Бот для упрощения работы с one.pskovedu.ru"
+        if cfg.github_url:
+            self.short_desc += f"\n\n🧑🏻‍💻 Github - {cfg.github_url}"
+
+    def set_short_description(self):
+        self.bot.set_my_short_description(self.short_desc)
+
+    def set_description(self):
+        self.bot.set_my_description(self.desc)
 
     def register_admin_hanlder(self, m: Message):
         cfg.set("owner_id", m.from_user.id)
@@ -393,6 +396,8 @@ class Telegram:
         self.bot_me = self.bot.get_me()
 
         self.msg_handler(self.register_admin_hanlder, func=lambda _: not cfg.owner_id)
+
+        self.get_base_bot_info()
 
         self.set_description()
         self.set_short_description()

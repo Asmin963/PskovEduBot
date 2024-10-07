@@ -277,6 +277,39 @@ class Trimester:
             "dateEnd": self.date_end
         }
 
+class Period:
+    """
+        Класс, описывающий Учебный период
+
+        :param id: Идентификатор учебного периода (str)
+        :param name: Название учебного периода (str)
+        :param start: Дата начала учебного периода (str)
+        :param end: Дата окончания учебного периода (str)
+        """
+
+    def __init__(self, id, name, start, end):
+        self.id = id
+        self.name = name
+        self.start = start
+        self.end = end
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            data.get('itemId'),
+            data.get('alltext'),
+            data.get('start'),
+            data.get('end')
+        )
+
+    def to_dict(self):
+        return {
+            "itemId": self.id,
+            "alltext": self.name,
+            "start": self.start,
+            "end": self.end
+        }
+
 
 class Diary:
     """
@@ -365,3 +398,41 @@ class Event:
         return {
             **{k: v for k, v in self.__dict__.items() if not k.startswith('_')}
         }
+
+
+class Teacher:
+    """
+    Класс, описывающий учителя
+
+    :param name: Имя. (Иванова И. И.)
+    :param id: Идентификатор учителя
+    """
+    def __init__(self, name: str, id: str):
+        self.name = name
+        self.id = id
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "id": self.id
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(**data)
+
+
+class Class:
+    def __init__(self, name: str, id: str):
+        self.name = name
+        self.id = id
+
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "id": self.id
+        }
+
+    @classmethod
+    def from_dict(cls, data: dict):
+        return cls(**data)

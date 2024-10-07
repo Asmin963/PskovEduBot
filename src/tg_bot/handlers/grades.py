@@ -3,7 +3,7 @@ import datetime
 from telebot.types import Message, CallbackQuery
 
 from ...config import cfg
-from ...utils import me_loader, scheluder, tools
+from ...utils import me_loader, scheduler, tools
 from .. import keyboards as kbs, CBT
 
 
@@ -11,13 +11,15 @@ def init_handlers(tg):
     bot = tg.bot
 
     def start_handler(m: Message):
-        bot.send_message(m.chat.id, "👋 <b>Привет! Я бот для работы с one.pskovedu.ru\n\n"
-                                    "🔔 Я могу уведомлять о новых оценках!</b>", reply_markup=kbs.github())
+        text = f"🎓 <b>Telegram Bot для взаимодействия с образовательным порталом one.pskovedu.ru</b>\n\n"
+        text += f"<b>🧑🏻‍💻 Разработчик - <a href='https://t.me/arthells'></a>@arthells</b>\n"
+        text += f"<b>🔗 Ссылка на <a href='{cfg.github_url}'>Github</a></b>\n\n"
+        bot.send_message(m.chat.id, text, reply_markup=kbs.github())
 
     def not_admin_handler(m: Message):
         if m.chat.id in tg.no_admin_messages:
             bot.del_msg(tg.no_admin_messages[m.chat.id])
-        result = bot.send_message(m.chat.id, "👑 <b>Команда доступна только для владельца бота.</b>",
+        result = bot.send_message(m.chat.id, "👑 <b>Команда доступна только для владельца</b>",
                                   reply_markup=kbs.github("🛠 Создать своего бота"))
         tg.no_admin_messages[m.chat.id] = result.message_id
 
@@ -38,12 +40,13 @@ def init_handlers(tg):
         day, edit, indent = list(map(int, c.data.split(":")[1:]))
         try:
             diary = tg.client.fetch_diary(indent=indent)
-            scheluder.save_diary_to_schedule(diary)
+            scheduler.save_diary_to_schedule(diary)
         except:
-            return bot.answer_cb(c.id, "На эту дату домашки нет")
+            return bot.edit_message(c.message, "🥳 На эту дату домашки нет!", kbs.back_to_homework_menu(indent))
         lessons = list(diary.days.values())[day - 1]
 
         homework_str = ""
+        homework_str += f"📅 <b>{tools.get_weekday(day - 1)}, {lessons[0].date}</b>\n\n"
         for lesson in lessons:
             if lesson.homework:
                 homework_str += f"<b>{lesson.subject}</b>\n"
@@ -55,7 +58,7 @@ def init_handlers(tg):
         else:
             bot.edit_message(c.message, homework_str, kbs.back_to_homework_menu(indent))
 
-    def homework_menu_cb(c: CallbackQuery, weeks_indent=0):
+    def homework_menu_cb(c: CallbackQuery):
         split = c.data.split(":")
         if len(split) > 1:
             weeks_indent = int(split[-1])
@@ -67,13 +70,16 @@ def init_handlers(tg):
                 weekdays = tools.weekdays(date=datetime.datetime.now() + td)
         else:
             weekdays = tools.weekdays()
-        bot.edit_message(c.message, f"<b>({weekdays[0].strftime("%d.%m.%Y")} - {weekdays[-1].strftime("%d.%m.%Y")})\nВыбери день недели: </b>",
-                         kbs.get_homework_menu(weeks_indent))
+        bot.edit_message(c.message,
+                         f"<b>🎒 {tg.client.me.class_name}\n\n📆 {weekdays[0].strftime("%d.%m.%Y")} - {weekdays[-1].strftime("%d.%m.%Y")}\n"
+                         f"\nВыбери день недели: </b>",
+                         reply_markup=kbs.get_homework_menu())
 
     def homework_menu(m: Message):
         weekdays = tools.weekdays()
         bot.send_message(m.chat.id,
-                         f"<b>({weekdays[0].strftime("%d.%m.%Y")} - {weekdays[-1].strftime("%d.%m.%Y")})\nВыбери день недели: </b>",
+                         f"<b>🎒 {tg.client.me.class_name}\n\n📆 {weekdays[0].strftime("%d.%m.%Y")} - {weekdays[-1].strftime("%d.%m.%Y")}\n"
+                         f"\nВыбери день недели: </b>",
                          reply_markup=kbs.get_homework_menu())
 
     tg.msg_handler(start_handler, commands=['start'])

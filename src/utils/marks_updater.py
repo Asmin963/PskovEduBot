@@ -36,7 +36,7 @@ def compare_and_update(old_marks_report, new_marks_report) -> List[Tuple[models.
 
 def get_new_marks(client: PskovEduAPI.Client):
     try:
-        new_grades = client.get_grades(1)
+        new_grades = client.get_grades_report(1)
         old_ws = me_loader.load_grades()
 
         if not old_ws:

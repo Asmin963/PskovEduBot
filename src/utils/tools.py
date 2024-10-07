@@ -2,10 +2,23 @@ import os
 from datetime import datetime, timedelta
 
 from src.PskovEduAPI import models
+from src.PskovEduAPI.common.utils import get_monday_date
 
 import logging
 
 logger = logging.getLogger(f"utils.{__name__}")
+
+
+WEEKDAYS = {
+    0: "Понедельник",
+    1: "Вторник",
+    2: "Среда",
+    3: "Четверг",
+    4: "Пятница",
+    5: "Суббота",
+    6: "Воскресенье",
+}
+
 
 def create_dirs():
     """
@@ -18,18 +31,6 @@ def create_dirs():
     for dir in dirs:
         if not os.path.exists(dir):
             os.makedirs(dir)
-
-def get_monday_date(format="%d.%m.%Y", time=None) -> str | datetime:
-    """
-    Возвращает дату понедельника текущей недели в формате "dd.mm.yyyy".
-
-    :param format: Формат времени. Если None, то возвращется datetime
-    :param time: Время от которого считать текущую неделю. Опционально
-
-    """
-    today = time or datetime.today()
-    monday = today - timedelta(days=today.weekday())
-    return monday.strftime(format) if format else monday
 
 def weekdays(date: datetime = None) -> list[datetime]:
     """
@@ -54,5 +55,11 @@ def start_log(user: models.Student, grades_report: models.GradesReport):
         logger.info(f"• {subject.name}: $YELLOW{', '.join(list(map(str, subject.grades)))}")
 
     logger.info("============================")
+
+def get_weekday(number: int):
+    """
+    Получает название для недели из числа
+    """
+    return WEEKDAYS.get(number)
 
 

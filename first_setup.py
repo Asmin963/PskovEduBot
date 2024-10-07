@@ -1,15 +1,16 @@
 import json
 import sys
 import time
-from telebot import TeleBot
+
 from colorama import Fore, Style
+from telebot import TeleBot
 
 default_config = {
     "token": "",
     "phpsessid": "",
     "owner_id": 0,
     "x1sso": None,
-    "delay": 5,
+    "delay": 10,
     "new_graders_notification": True,
     "inline_mode": True,
     "show_name_in_inline": False
@@ -52,20 +53,21 @@ def first_setup():
     time.sleep(sleep_time)
 
     while True:
-       try:
-           print(
-               f"\n{Fore.MAGENTA}{Style.BRIGHT}┌── {Fore.CYAN}Введи API-токен Telegram-бота (получить его можно у @BotFather). "
-               f"{Fore.RED}(._.){Style.RESET_ALL}")
-           token = input(f"{Fore.MAGENTA}{Style.BRIGHT}└───> {Style.RESET_ALL}").strip()
-           if token and token.split(":")[0].isdigit():
-               config["token"] = token
-               break
-           if TeleBot(token).get_me().username is None:
-               raise Exception()
-       except:
-           print(f"\n{Fore.CYAN}{Style.BRIGHT}Неверный формат токена. Попробуй еще раз! {Fore.RED}\(!!˚0˚)/{Style.RESET_ALL}")
+        try:
+            print(
+                f"\n{Fore.MAGENTA}{Style.BRIGHT}┌── {Fore.CYAN}Введи API-токен Telegram-бота (получить его можно у @BotFather). "
+                f"{Fore.RED}(._.){Style.RESET_ALL}")
+            token = input(f"{Fore.MAGENTA}{Style.BRIGHT}└───> {Style.RESET_ALL}").strip()
+            if not (token and token.split(":")[0].isdigit()):
+                raise Exception()
+            if TeleBot(token).get_me().username is None:
+                raise Exception()
+            config["token"] = token
+            break
+        except:
+            print(
+                f"\n{Fore.CYAN}{Style.BRIGHT}Неверный формат токена. Попробуй еще раз! {Fore.RED}\(!!˚0˚)/{Style.RESET_ALL}")
 
-    # Ввод PHPSESSID
     while True:
         print(
             f"\n{Fore.MAGENTA}{Style.BRIGHT}┌── {Fore.CYAN}Введи свой PHPSESSID для доступа к порталу one.pskovedu.ru (Используй Расширение EditThisCookie)"

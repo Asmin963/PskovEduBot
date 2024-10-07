@@ -20,9 +20,9 @@ FILE_TIME_FORMAT = "%d.%m.%y %H:%M:%S"
 CLEAR_RE = re.compile(r"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))|(\n)|(\r)")
 
 
-def add_colors(text: str) -> str:
+def add_colors_and_styles(text: str) -> str:
     """
-    Заменяет ключевые слова на коды цветов.
+    Заменяет ключевые слова на коды цветов и стилей
 
     $YELLOW - желтый текст.
 
@@ -36,7 +36,7 @@ def add_colors(text: str) -> str:
 
     :return: цветной текст.
     """
-    colors = {
+    attrs = {
         "$YELLOW": Fore.YELLOW,
         "$CYAN": Fore.CYAN,
         "$MAGENTA": Fore.MAGENTA,
@@ -53,10 +53,15 @@ def add_colors(text: str) -> str:
         "$B_GREEN": Back.GREEN,
         "$B_BLACK": Back.BLACK,
         "$B_WHITE": Back.WHITE,
+
+        "$BRIGHT": Style.BRIGHT,
+        "$RESET": Style.RESET_ALL,
+        "$DIM": Style.DIM,
+        "$NORMAL": Style.NORMAL
     }
-    for c in colors:
+    for c in attrs:
         if c in text:
-            text = text.replace(c, colors[c])
+            text = text.replace(c, attrs[c])
     return text
 
 
@@ -70,7 +75,7 @@ class CLILoggerFormatter(logging.Formatter):
 
     def format(self, record: logging.LogRecord) -> str:
         msg = record.getMessage()
-        msg = add_colors(msg)
+        msg = add_colors_and_styles(msg)
         msg = msg.replace("$RESET", LOG_COLORS[record.levelno])
         record.msg = msg
         log_format = CLI_LOG_FORMAT.replace("$RESET", Style.RESET_ALL + LOG_COLORS[record.levelno])

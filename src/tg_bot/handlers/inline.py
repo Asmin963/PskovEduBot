@@ -18,18 +18,18 @@ def init_inline_handlers(tg):
 
         if cfg.github_url:
             text = f"🎓 <b>Telegram Bot для взаимодействия с образовательным порталом one.pskovedu.ru</b>\n\n"
-            text += f"<b>👨🏼‍💻 Разработчик - @arthells</b>\n"
+            text += f"<b>🧑🏻‍💻 Разработчик - <a href='https://t.me/arthells'></a>@arthells</b>\n"
             text += f"<b>🔗 Ссылка на <a href='{cfg.github_url}'>Github</a></b>\n\n"
             github_result = InlineQueryResultArticle(
                 id=52525252525252,
-                title="👨🏼‍💻 Github",
+                title="👨🏼‍💻 Information",
                 description="Информация о проекте",
                 input_message_content=InputTextMessageContent(
                     message_text=text,
                     parse_mode="HTML"
                 ),
                 reply_markup=kbs.github("🖥 Создать бота"),
-                thumbnail_url="https://avatars.githubusercontent.com/u/80214183?v=4"
+                # thumbnail_url="https://avatars.githubusercontent.com/u/80214183?v=4"
             )
             results.append(github_result)
 
@@ -54,7 +54,8 @@ def init_inline_handlers(tg):
                         message_text=result_text,
                         parse_mode="HTML"
                     ),
-                    reply_markup=kbs.github(),
+                    reply_markup=kbs.github("🖥 Создать бота"),
+                    # thumbnail_url="https://static.rustore.ru/apk/1574868927/content/ICON/06ae4f6a-f68c-4ec9-826d-1442d7d4b146.png"
                 )
                 results.append(result)
 

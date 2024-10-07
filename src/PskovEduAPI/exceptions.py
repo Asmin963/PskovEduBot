@@ -28,3 +28,10 @@ class RequestFailed(Exception):
         if self.log_response:
             msg += f"\n{self.response.content.decode()}"
         return msg
+
+class PageNotFound(RequestFailed):
+    def __init__(self, response: requests.Response):
+        super().__init__(response)
+
+    def __str__(self):
+        return f"Страница не найдена. {self.url}"
