@@ -14,7 +14,7 @@ def init_handlers(tg):
         text = f"🎓 <b>Telegram Bot для взаимодействия с образовательным порталом one.pskovedu.ru</b>\n\n"
         text += f"<b>🧑🏻‍💻 Разработчик - <a href='https://t.me/arthells'></a>@arthells</b>\n"
         text += f"<b>🔗 Ссылка на <a href='{cfg.github_url}'>Github</a></b>\n\n"
-        bot.send_message(m.chat.id, text, reply_markup=kbs.github())
+        bot.send_message(m.chat.id, text, reply_markup=kbs.github("📱 Инструкция по установке"))
 
     def not_admin_handler(m: Message):
         if m.chat.id in tg.no_admin_messages:
