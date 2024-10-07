@@ -8,7 +8,7 @@ from src.utils import marks_updater
 
 import logging
 
-logger = logging.getLogger(f"Utils.{__name__}")
+logger = logging.getLogger(f"utils.{__name__}")
 
 
 def check_new_marks(acc, bot, delay):
