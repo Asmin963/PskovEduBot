@@ -1,12 +1,14 @@
+import random
 import time
 from threading import Thread
 
 from src.config import cfg
+from src.tg_bot import keyboards
 from src.utils import marks_updater
 
 import logging
 
-logger = logging.getLogger(F"Utils{__name__}")
+logger = logging.getLogger(f"Utils.{__name__}")
 
 
 def check_new_marks(acc, bot, delay):
@@ -25,7 +27,7 @@ def check_new_marks(acc, bot, delay):
                 else:
                     message_text += f"\n<i>Cредний балл: </i><code>{subject.avg_grade}</code>"
                 logger.info(f'$BRIGHT$CYANНовые оценки: $YELLOW{grades_str}')
-                bot.send_message(cfg.owner_id, message_text, parse_mode='HTML')
+                bot.send_message(cfg.owner_id, message_text, parse_mode='HTML', reply_markup=keyboards.star_it() if random.random() < 0.4 else None)
         time.sleep(delay)
 
 def start_checking_marks(acc, bot, delay=30):

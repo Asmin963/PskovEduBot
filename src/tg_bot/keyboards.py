@@ -58,3 +58,8 @@ def get_homework_menu(weeks_indent=0):
 
 def back_to_homework_menu(indent=0):
     return K().add(B("⬅️ Назад", None, f"{CBT.GET_HOMEWORK_MENU}:{indent}"))
+
+def star_it():
+    return K().add(
+        B("⭐️ Оценить проект", "https://github.com/Asmin963/PskovEduBot?tab=readme-ov-file#-поддержите-проект")
+    )

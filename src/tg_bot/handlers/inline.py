@@ -7,7 +7,6 @@ from telebot.types import InlineQuery, InlineQueryResultArticle, InputTextMessag
 
 from .. import keyboards as kbs
 
-
 def init_inline_handlers(tg):
     bot = tg.bot
 
