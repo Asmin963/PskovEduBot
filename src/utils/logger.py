@@ -23,18 +23,6 @@ CLEAR_RE = re.compile(r"(\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~]))|(\n)|(\r)")
 def add_colors_and_styles(text: str) -> str:
     """
     Заменяет ключевые слова на коды цветов и стилей
-
-    $YELLOW - желтый текст.
-
-    $CYAN - светло-голубой текст.
-
-    $MAGENTA - фиолетовый текст.
-
-    $BLUE - синий текст.
-
-    :param text: текст.
-
-    :return: цветной текст.
     """
     attrs = {
         "$YELLOW": Fore.YELLOW,
