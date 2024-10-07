@@ -26,7 +26,7 @@ def check_new_marks(acc, bot, delay):
                                      f"{round(sum(subject.grades) / len(subject.grades), 2) if subject.grades else 0}</code>")
                 else:
                     message_text += f"\n<i>Cредний балл: </i><code>{subject.avg_grade}</code>"
-                logger.info(f'$BRIGHT$CYANНовые оценки: $YELLOW{grades_str}')
+                logger.info(f'$BRIGHT$CYAN{subject.name}: $YELLOW{grades_str}')
                 bot.send_message(cfg.owner_id, message_text, parse_mode='HTML', reply_markup=keyboards.star_it() if random.random() < 0.4 else None)
         time.sleep(delay)
 
