@@ -29,10 +29,24 @@ echo -e "${GREEN}Создаю виртуальное окружение и ус�
 cd PskovEdutBot
 pip install -r reqierements.txt
 
-echo -e "${GREEN}Установка pm2...${NC}"
-npm install -g pm2
+echo -e "${GREEN}Сейчас необходимо выполнить первичную установку${NC}"
+sudo python3.11 main.py
 
-echo -e "${GREEN}Запускаю PskovEdutBot${NC}"
+echo -e "${GREEN}Ок, теперь добавим бота как фоновый процесс${NC}"
+
+echo -e "${GREEN}Установка curl...${NC}"
+sudo apt-get install -y curl
+
+echo -e "${GREEN}Загрузка NodeJS...${NC}"
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+
+echo -e "${GREEN}Установка NodeJS...${NC}"
+sudo apt -y install nodejs
+
+echo -e "${GREEN}Установка pm2...${NC}"
+sudo npm install -g pm2
+
+echo -e "${GREEN}Запускаю PskovEdutBot...${NC}"
 pm2 start main.py --interpreter python3.11 --name PskovEduBot
 
 pm2 save
