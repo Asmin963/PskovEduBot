@@ -30,15 +30,14 @@
 5. Запустите `start.bat`
 
 ### 🔑 Где получить PHPSESSID?
-1. **Установите расширение для браузера [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=ru)**
+1. **Установите расширение для браузера [Cookie-Editor](https://chromewebstore.google.com/detail/cookie-editor/hlkenndednhfkekhgcdicdfddnkalmdm)**
    
-![image](https://github.com/user-attachments/assets/2a153223-b656-4a06-b0c0-a4812b13ed63)
+![image](https://github.com/user-attachments/assets/31189f1d-d57b-4e51-b092-b5d9b2fac0f0)
 
 2. **Скопируйте значение PHPSESSID**
    
-![image](https://github.com/user-attachments/assets/7ff24517-0c89-4e95-87f3-01c622d0e49e)
+![image](https://github.com/user-attachments/assets/13664afc-63af-4bba-bbe6-a17a5c8c3d36)
 
-   
 ## ⚡ Включение инлайн режима
 ### Для работы инлайн режима необходимо включить его в настройках бота через BotFather:
 
