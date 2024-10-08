@@ -23,10 +23,21 @@
    ```
    wget https://raw.githubusercontent.com/Asmin963/PskovEduBot/refs/heads/main/linux_install.sh -nc && bash linux_install.sh
 После завершения установки бот будет готов к использованию.
+
 ### Для Windows
 1. Установите <a href="https://www.python.org/downloads/windows/">Python</a> (если не установлен).
 2. Запустите `setup.bat` и ожидайте завершения установки
 5. Запустите `start.bat`
+
+### 🔑 Где получить PHPSESSID?
+1. **Установите расширение для браузера [EditThisCookie](https://chrome.google.com/webstore/detail/editthiscookie/fngmhnnpilhplaeedifhccceomclgfbg?hl=ru)**
+   
+![image](https://github.com/user-attachments/assets/2a153223-b656-4a06-b0c0-a4812b13ed63)
+
+2. **Скопируйте значение PHPSESSID**
+   
+![image](https://github.com/user-attachments/assets/7ff24517-0c89-4e95-87f3-01c622d0e49e)
+
    
 ## ⚡ Включение инлайн режима
 ### Для работы инлайн режима необходимо включить его в настройках бота через BotFather:
